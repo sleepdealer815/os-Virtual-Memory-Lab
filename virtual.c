@@ -19,7 +19,7 @@ int process_page_access_fifo(struct PTE page_table[TABLEMAX],
 
     // 情况2：页面不在内存中，但有空闲帧
     if (*frame_cnt > 0) {
-        // 从帧池中取出第一个空闲帧（注意：不是最后一个）
+        // 从帧池中取出第一个空闲帧
         int free_frame = frame_pool[0];
         
         // 将帧池中的元素前移
@@ -33,7 +33,7 @@ int process_page_access_fifo(struct PTE page_table[TABLEMAX],
         page_table[page_number].frame_number = free_frame;
         page_table[page_number].arrival_timestamp = current_timestamp;
         page_table[page_number].last_access_timestamp = current_timestamp;
-        page_table[page_table[page_number].reference_count = 1;
+        page_table[page_number].reference_count = 1;
 
         return free_frame;
     }
